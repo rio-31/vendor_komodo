@@ -74,6 +74,10 @@ PRODUCT_COPY_FILES += \
 $(foreach f,$(wildcard vendor/komodo/prebuilt/common/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
 
+# Omnistyles permissions
+PRODUCT_COPY_FILES += \
+    vendor/komodo/prebuilt/etc/permissions/privapp-permissions-omni.xml:system/etc/permissions/privapp-permissions-omni.xml
+
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
