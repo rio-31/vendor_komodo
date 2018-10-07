@@ -84,6 +84,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.control_privapp_permissions=enforce
 
+# Lawnchair
+PRODUCT_PACKAGES += Lawnchair
+PRODUCT_COPY_FILES += \
+    vendor/komodo/prebuilt/common/etc/permissions/privapp-permissions-lawnchair.xml:system/etc/permissions/privapp-permissions-lawnchair.xml \
+    vendor/komodo/prebuilt/common/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml:system/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml
+
 # Power whitelist
 PRODUCT_COPY_FILES += \
     vendor/komodo/config/permissions/custom-power-whitelist.xml:system/etc/sysconfig/custom-power-whitelist.xml
