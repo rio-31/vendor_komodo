@@ -90,6 +90,13 @@ PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/etc/permissions/privapp-permissions-lawnchair.xml:system/etc/permissions/privapp-permissions-lawnchair.xml \
     vendor/komodo/prebuilt/common/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml:system/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.vendor.overlay.theme=com.potato.overlay.lawnconf
+
+# Lawnchair Default Configuration
+PRODUCT_PACKAGES += \
+    LawnConf
+
 # Power whitelist
 PRODUCT_COPY_FILES += \
     vendor/komodo/config/permissions/custom-power-whitelist.xml:system/etc/sysconfig/custom-power-whitelist.xml
