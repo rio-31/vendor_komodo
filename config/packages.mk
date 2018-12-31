@@ -25,6 +25,11 @@ PRODUCT_PACKAGES += \
     Recorder \
     RetroMusicPlayer
 
+# Cutout control overlays
+PRODUCT_PACKAGES += \
+    HideCutout \
+    StatusBarStock
+
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
 PRODUCT_PACKAGES += \
