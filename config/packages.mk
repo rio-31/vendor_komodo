@@ -12,6 +12,11 @@ PRODUCT_PACKAGES += \
     mkfs.ntfs \
     mount.ntfs
 
+# Cutout control overlays
+PRODUCT_PACKAGES += \
+    HideCutout \
+    StatusBarStock
+
 # Required
 PRODUCT_PACKAGES += \
     ThemePicker \
