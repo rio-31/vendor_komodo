@@ -3,7 +3,8 @@ PRODUCT_PACKAGES += \
     ThemePicker \
     komodoOverlayStub \
     OmniStyle \
-    Longshot
+    Longshot \
+    NoCutoutOverlay
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
