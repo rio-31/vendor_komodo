@@ -1,4 +1,4 @@
-function __print_custom_functions_help() {
+function __print_komodo_functions_help() {
 cat <<EOF
 Additional functions:
 - cout:            Changes directory to out.
@@ -9,14 +9,14 @@ Additional functions:
 - pixelrebase:     Rebase a Gerrit change and push it again.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
-- githubremote:    Add git remote for PixelExperience Github.
+- githubremote:    Add git remote for Komodo OS Github.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
 - cmka:            Cleans and builds using mka.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
 - reposync:        Parallel repo sync using ionice and SCHED_BATCH.
-- repopick:        Utility to fetch changes from PixelExperience Gerrit.
+- repopick:        Utility to fetch changes from Komodo OS Gerrit.
 - installboot:     Installs a boot.img to the connected device.
 - installrecovery: Installs a recovery.img to the connected device.
 EOF
@@ -82,7 +82,7 @@ function breakfast()
                 variant="userdebug"
             fi
 
-            lunch aosp_$target-$variant
+            lunch komodo_$target-$variant
         fi
     fi
     return $?
@@ -93,7 +93,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/PixelExperience-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/KomodoOS-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -107,7 +107,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-        if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD"); then
+        if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD"); then
             # if adbd isn't root we can't write to /cache/recovery/
             adb root
             sleep 1
@@ -123,7 +123,7 @@ EOF
             fi
             rm /tmp/command
         else
-            echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+            echo "The connected device does not appear to be $KOMODO_BUILD, run away!"
         fi
         return $?
     else
@@ -303,11 +303,11 @@ function githubremote()
         return 1
     fi
     git remote rm github 2> /dev/null
-    local REMOTE=$(git config --get remote.pixel.projectname)
+    local REMOTE=$(git config --get remote.komodo.projectname)
 
     local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
 
-    git remote add github https://github.com/PixelExperience/$PROJECT
+    git remote add github https://github.com/Komodo-OS-Rom/$PROJECT
     echo "Remote 'github' created"
 }
 
@@ -341,7 +341,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD");
     then
         adb push $OUT/boot.img /cache/
         if [ -e "$OUT/system/lib/modules/*" ];
@@ -356,7 +356,7 @@ function installboot()
         adb shell rm -rf /cache/boot.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+        echo "The connected device does not appear to be $KOMODO_BUILD, run away!"
     fi
 }
 
@@ -390,14 +390,14 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         adb shell rm -rf /cache/recovery.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+        echo "The connected device does not appear to be $KOMODO_BUILD, run away!"
     fi
 }
 
@@ -652,7 +652,7 @@ function pixelrebase() {
         return
     fi
     cd $dir
-    repo=$(git config --get remote.pixel.projectname)
+    repo=$(git config --get remote.komodo.projectname)
     echo "Starting branch..."
     repo start tmprebase .
     echo "Bringing it up to date..."
@@ -743,7 +743,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop org.komodo.device | grep -q "$KOMODO_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -861,7 +861,7 @@ EOF
     rm -f $OUT/.log
     return 0
     else
-        echo "The connected device does not appear to be $CUSTOM_BUILD, run away!"
+        echo "The connected device does not appear to be $KOMODO_BUILD, run away!"
     fi
 }
 
@@ -874,7 +874,7 @@ alias cmkap='dopush cmka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/aosp/build/tools/repopick.py $@
+    $T/vendor/komodo/build/tools/repopick.py $@
 }
 
 function fixup_common_out_dir() {

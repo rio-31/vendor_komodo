@@ -2,6 +2,7 @@
 # Copyright (C) 2012-2013, The CyanogenMod Project
 # Copyright (C) 2012-2015, SlimRoms Project
 # Copyright (C) 2016-2017, AOSiP
+# Copyright (C) 2019-2020, Komodo OS Rom
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,11 +44,11 @@ except ImportError:
 DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
-custom_local_manifest = ".repo/local_manifests/pixel.xml"
+custom_local_manifest = ".repo/local_manifests/komodo.xml"
 custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'ten')
-custom_dependencies = "aosp.dependencies"
-org_manifest = "pixel-devices"  # leave empty if org is provided in manifest
-org_display = "PixelExperience-Devices"  # needed for displaying
+custom_dependencies = "komodo.dependencies"
+org_manifest = "komodo-devices"  # leave empty if org is provided in manifest
+org_display = "Komodo-OS-Devices"  # needed for displaying
 
 github_auth = None
 

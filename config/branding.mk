@@ -1,30 +1,27 @@
 # Set all versions
-CUSTOM_BUILD_TYPE ?= UNOFFICIAL
+KOMODO_BUILD_TYPE ?= UNOFFICIAL
 
-CUSTOM_DATE_YEAR := $(shell date -u +%Y)
-CUSTOM_DATE_MONTH := $(shell date -u +%m)
-CUSTOM_DATE_DAY := $(shell date -u +%d)
-CUSTOM_DATE_HOUR := $(shell date -u +%H)
-CUSTOM_DATE_MINUTE := $(shell date -u +%M)
-CUSTOM_BUILD_DATE_UTC := $(shell date -d '$(CUSTOM_DATE_YEAR)-$(CUSTOM_DATE_MONTH)-$(CUSTOM_DATE_DAY) $(CUSTOM_DATE_HOUR):$(CUSTOM_DATE_MINUTE) UTC' +%s)
-CUSTOM_BUILD_DATE := $(CUSTOM_DATE_YEAR)$(CUSTOM_DATE_MONTH)$(CUSTOM_DATE_DAY)-$(CUSTOM_DATE_HOUR)$(CUSTOM_DATE_MINUTE)
+KOMODO_DATE_YEAR := $(shell date -u +%Y)
+KOMODO_DATE_MONTH := $(shell date -u +%m)
+KOMODO_DATE_DAY := $(shell date -u +%d)
+KOMODO_DATE_HOUR := $(shell date -u +%H)
+KOMODO_DATE_MINUTE := $(shell date -u +%M)
+KOMODO_BUILD_DATE_UTC := $(shell date -d '$(KOMODO_DATE_YEAR)-$(KOMODO_DATE_MONTH)-$(KOMODO_DATE_DAY) $(KOMODO_DATE_HOUR):$(KOMODO_DATE_MINUTE) UTC' +%s)
+KOMODO_BUILD_DATE := $(KOMODO_DATE_YEAR)$(KOMODO_DATE_MONTH)$(KOMODO_DATE_DAY)-$(KOMODO_DATE_HOUR)$(KOMODO_DATE_MINUTE)
 
-CUSTOM_PLATFORM_VERSION := 10.0
+KOMODO_PLATFORM_VERSION := 10.0
 
-TARGET_PRODUCT_SHORT := $(subst aosp_,,$(CUSTOM_BUILD))
+TARGET_PRODUCT_SHORT := $(subst aosp_,,$(KOMODO_BUILD))
 
-CUSTOM_VERSION := PixelExperience_$(CUSTOM_BUILD)-$(CUSTOM_PLATFORM_VERSION)-$(CUSTOM_BUILD_DATE)-BETA-$(CUSTOM_BUILD_TYPE)
-CUSTOM_VERSION_PROP := 10
-ROM_FINGERPRINT := PixelExperience/$(CUSTOM_PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(CUSTOM_BUILD_DATE)
+KOMODO_VERSION := KomodoOS_$(KOMODO_BUILD)-$(KOMODO_PLATFORM_VERSION)-$(KOMODO_BUILD_DATE)-BETA-$(KOMODO_BUILD_TYPE)
+KOMODO_VERSION_PROP := 10
+ROM_FINGERPRINT := KomodoOS/$(KOMODO_PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(KOMODO_BUILD_DATE)
 
-CUSTOM_PROPERTIES := \
-    org.pixelexperience.version=$(CUSTOM_VERSION_PROP) \
-    org.pixelexperience.version.display=$(CUSTOM_VERSION) \
-    org.pixelexperience.build_date=$(CUSTOM_BUILD_DATE) \
-    org.pixelexperience.build_date_utc=$(CUSTOM_BUILD_DATE_UTC) \
-    org.pixelexperience.build_type=$(CUSTOM_BUILD_TYPE) \
-    org.pixelexperience.fingerprint=$(ROM_FINGERPRINT)
+KOMODO_PROPERTIES := \
+    org.komodo.version=$(KOMODO_VERSION_PROP) \
+    org.komodo.version.display=$(KOMODO_VERSION) \
+    org.komodo.build_date=$(KOMODO_BUILD_DATE) \
+    org.komodo.build_date_utc=$(KOMODO_BUILD_DATE_UTC) \
+    org.komodo.build_type=$(KOMODO_BUILD_TYPE) \
+    org.komodo.fingerprint=$(ROM_FINGERPRINT)
 
-ifeq ($(CUSTOM_BUILD_TYPE), OFFICIAL)
-PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/secure/releasekey
-endif
