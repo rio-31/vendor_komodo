@@ -15,6 +15,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#
+# Build system colors
+#
+# PFX: Prefix "target C++:" in yellow
+# INS: Module "Install:" output color (cyan for ics)
+ifneq ($(BUILD_WITH_COLORS),0)
+    include $(TOP_DIR)vendor/komodo/build/core/colors.mk
+endif
+
 KOMODO_TARGET_PACKAGE := $(PRODUCT_OUT)/$(KOMODO_VERSION).zip
 
 .PHONY: bacon
