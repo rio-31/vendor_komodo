@@ -244,6 +244,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/komodo/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay/common
 
+# Turn off the error checks and allow PATH tool to be used
+export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
+
 # overlays
 include vendor/komodo/config/accents.mk
 include vendor/komodo/config/primary.mk
