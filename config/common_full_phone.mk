@@ -30,5 +30,4 @@ PRODUCT_PACKAGES += \
     Gallery2 \
     DeskClock \
     Calendar \
-    WallpaperPicker2 \
     ThemePicker
