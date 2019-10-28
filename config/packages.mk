@@ -1,6 +1,7 @@
 # Required
 PRODUCT_PACKAGES += \
-    ThemePicker
+    ThemePicker \
+    komodoOverlayStub
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
