@@ -1,5 +1,6 @@
 # Set all versions
 KOMODO_BUILD_TYPE ?= UNOFFICIAL
+CURRENT_BUILD_TYPE ?= nogapps
 
 KOMODO_DATE_YEAR := $(shell date -u +%Y)
 KOMODO_DATE_MONTH := $(shell date -u +%m)

@@ -154,7 +154,17 @@ include vendor/komodo/config/branding.mk
 # OTA
 include vendor/komodo/config/ota.mk
 
+ifeq ($(CURRENT_BUILD_TYPE), gapps)
+# GApps
+include vendor/gapps/config.mk
+endif
+
 # Pixel Style
 include vendor/pixelstyle/config.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
+
+ifeq ($(CURRENT_BUILD_TYPE), gapps)
+# Customization
+include vendor/google/customization/config.mk
+endif

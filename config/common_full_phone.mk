@@ -1,5 +1,4 @@
 # Telephony
-
 IS_PHONE := true
 
 # World APN list
@@ -23,11 +22,16 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Inherit full common PixelExperience stuff
 $(call inherit-product, vendor/komodo/config/common_full.mk)
 
+ifeq ($(CURRENT_BUILD_TYPE), nogapps)
 # Extra Apps
 PRODUCT_PACKAGES += \
     messaging \
     Dialer \
     Gallery2 \
     DeskClock \
-    Calendar \
+    Calendar
+endif
+
+# Required
+PRODUCT_PACKAGES += \
     ThemePicker
