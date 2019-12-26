@@ -22,3 +22,13 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Inherit full common PixelExperience stuff
 $(call inherit-product, vendor/komodo/config/common_full.mk)
+
+# Extra Apps
+PRODUCT_PACKAGES += \
+    messaging \
+    Dialer \
+    Gallery2 \
+    DeskClock \
+    Calendar \
+    WallpaperPicker2 \
+    SoundRecorder
