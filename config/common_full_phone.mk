@@ -31,4 +31,4 @@ PRODUCT_PACKAGES += \
     DeskClock \
     Calendar \
     WallpaperPicker2 \
-    SoundRecorder
+    ThemePicker
