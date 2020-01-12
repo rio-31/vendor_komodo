@@ -137,6 +137,7 @@ DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay/common
 
 # Themes
 include vendor/komodo/config/accents.mk
+include vendor/komodo/config/primary.mk
 
 # Some props that we need for the google stuff we're adding
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
