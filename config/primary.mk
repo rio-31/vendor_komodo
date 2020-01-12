@@ -1,2 +1,3 @@
 PRODUCT_PACKAGES += \
-    PrimaryColorOceanOverlay
+    PrimaryColorOceanOverlay \
+    PrimaryColorNatureOverlay
