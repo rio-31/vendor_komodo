@@ -1,4 +1,5 @@
 PRODUCT_PACKAGES += \
     PrimaryColorOceanOverlay \
     PrimaryColorNatureOverlay \
-    PrimaryColorFlameOverlay
+    PrimaryColorFlameOverlay \
+    PrimaryColorCharcoalOverlay
