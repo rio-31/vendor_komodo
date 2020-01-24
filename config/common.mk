@@ -113,6 +113,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     GboardGoPreb
 
+#Gvm
+include vendor/komodo/config/gvm.mk
+
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.storage_manager.enabled=true
