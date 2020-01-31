@@ -172,6 +172,9 @@ include vendor/komodo/config/branding.mk
 # OTA
 include vendor/komodo/config/ota.mk
 
+# Packages
+include vendor/komodo/config/packages.mk
+
 ifeq ($(CURRENT_BUILD_TYPE), gapps)
 # GApps
 include vendor/gapps/config.mk

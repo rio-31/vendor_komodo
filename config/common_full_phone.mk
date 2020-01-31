@@ -19,19 +19,5 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.config.ringtone=The_big_adventure.ogg
 
-# Inherit full common PixelExperience stuff
+# Inherit full common Komodo  stuff
 $(call inherit-product, vendor/komodo/config/common_full.mk)
-
-ifeq ($(CURRENT_BUILD_TYPE), nogapps)
-# Extra Apps
-PRODUCT_PACKAGES += \
-    messaging \
-    Dialer \
-    Gallery2 \
-    DeskClock \
-    Calendar
-endif
-
-# Required
-PRODUCT_PACKAGES += \
-    ThemePicker
