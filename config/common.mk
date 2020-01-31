@@ -181,8 +181,3 @@ endif
 include vendor/pixelstyle/config.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
-
-ifeq ($(CURRENT_BUILD_TYPE), gapps)
-# Customization
-include vendor/google/customization/config.mk
-endif
