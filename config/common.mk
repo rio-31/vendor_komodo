@@ -171,6 +171,10 @@ PRODUCT_PACKAGES += \
 # Turn off the error checks and allow PATH tool to be used
 export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
 
+# MIUI like brightness slider
+PRODUCT_PACKAGES += \
+    BrightnessSliderOverlay
+
 # Branding
 include vendor/komodo/config/branding.mk
 
