@@ -49,7 +49,6 @@ PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/komodo/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
     vendor/komodo/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
-    vendor/komodo/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 
 # OTA
 ifneq ($(TARGET_BUILD_VARIANT),user)
