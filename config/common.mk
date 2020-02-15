@@ -62,7 +62,9 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/komodo/config/permissions/backup.xml:system/etc/sysconfig/backup.xml \
     vendor/komodo/config/permissions/privapp-permissions-fm.xml:system/etc/permissions/privapp-permissions-fm.xml \
-    vendor/komodo/config/permissions/org.lineageos.snap.xml:system/etc/permissions/org.lineageos.snap.xml
+    vendor/komodo/config/permissions/org.lineageos.snap.xml:system/etc/permissions/org.lineageos.snap.xml \
+    vendor/komodo/config/permissions/privapp-permissions-system-komodo.xml:system/etc/permissions/privapp-permissions-system-komodo.xml \
+    vendor/komodo/config/permissions/privapp-permissions-product-komodo.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-product-komodo.xml
 
 # Copy all custom init rc files
 $(foreach f,$(wildcard vendor/komodo/prebuilt/common/etc/init/*.rc),\
