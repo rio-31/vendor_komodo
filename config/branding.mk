@@ -1,6 +1,19 @@
 # Set all versions
-KOMODO_BUILD_TYPE ?= UNOFFICIAL
+KOMODO_BUILD_TYPE := UNOFFICIAL
 CURRENT_BUILD_TYPE ?= nogapps
+
+CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
+
+ifeq ($(KOMODO_OFFICIAL), true)
+   LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
+    ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
+      IS_OFFICIAL=true
+      KOMODO_BUILD_TYPE := OFFICIAL
+    endif
+    ifneq ($(IS_OFFICIAL), true)
+       KOMODO_BUILD_TYPE := UNOFFICIAL
+    endif
+endif
 
 KOMODO_DATE_YEAR := $(shell date -u +%Y)
 KOMODO_DATE_MONTH := $(shell date -u +%m)
