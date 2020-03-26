@@ -51,7 +51,13 @@ PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
     vendor/komodo/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 
-ifeq ($(AB_OTA_UPDATER),true)
+# OTA
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.ota.allow_downgrade=true
+endif
+
+ifneq ($(AB_OTA_PARTITIONS),)
 PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
     vendor/komodo/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
