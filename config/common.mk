@@ -181,3 +181,6 @@ endif
 include vendor/pixelstyle/config.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
+
+#Lawnchair 
+$(call inherit-product-if-exists, vendor/lawnchair/lawnchair.mk)
