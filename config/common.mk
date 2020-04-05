@@ -159,9 +159,6 @@ PRODUCT_PACKAGES += \
     misc_writer_system \
     themed_bootanimation
 
-# Turn off the error checks and allow PATH tool to be used
-export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true
-
 # MIUI like brightness slider
 PRODUCT_PACKAGES += \
     BrightnessSliderOverlay
