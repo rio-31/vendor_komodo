@@ -36,5 +36,10 @@ It allows additional grants on top of privapp-permissions-platform.xml
         <permission name="android.permission.CHANGE_OVERLAY_PACKAGES"/>
         <permission name="android.permission.SET_WALLPAPER_COMPONENT"/>
     </privapp-permissions>
+    
+    <privapp-permissions package="com.android.camera2">
+        <permission name="android.permission.PREVENT_POWER_KEY"/>
+        <permission name="android.permission.BIND_WALLPAPER"/>
+    </privapp-permissions>
 
 </permissions>
