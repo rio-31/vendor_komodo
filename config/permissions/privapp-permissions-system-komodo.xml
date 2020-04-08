@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /**
- * Copyright (C) 2019 ion-OS
- * Copyright (C) 2019 Ancient-OS
+ * Copyright (C) 2020 Komodo Os Rom
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +29,12 @@ It allows additional grants on top of privapp-permissions-platform.xml
     
     <privapp-permissions package="com.android.dialer">
         <permission name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+    </privapp-permissions>
+    
+    <privapp-permissions package="com.android.customization">
+        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+        <permission name="android.permission.CHANGE_OVERLAY_PACKAGES"/>
+        <permission name="android.permission.SET_WALLPAPER_COMPONENT"/>
     </privapp-permissions>
 
 </permissions>
