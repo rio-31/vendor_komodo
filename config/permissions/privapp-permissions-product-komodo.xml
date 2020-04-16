@@ -76,4 +76,8 @@ It allows additional grants on top of privapp-permissions-platform.xml
         <permission name="android.permission.READ_SEARCH_INDEXABLES"/>
    </privapp-permissions>
 
+   <privapp-permissions package="com.android.dialer">
+        <permission name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+   </privapp-permissions>
+
 </permissions>
