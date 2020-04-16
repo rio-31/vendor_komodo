@@ -26,11 +26,7 @@ It allows additional grants on top of privapp-permissions-platform.xml
     <privapp-permissions package="com.android.screenshot">
         <permission name="android.permission.READ_FRAME_BUFFER"/>
     </privapp-permissions>
-    
-    <privapp-permissions package="com.android.dialer">
-        <permission name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
-    </privapp-permissions>
-    
+   
     <privapp-permissions package="com.android.customization">
         <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
         <permission name="android.permission.CHANGE_OVERLAY_PACKAGES"/>
