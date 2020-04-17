@@ -46,3 +46,6 @@ KOMODO_PROPERTIES := \
     org.komodo.ziptype=$(KOMODO_BUILD_ZIP_TYPE) \
     org.komodo.fingerprint=$(ROM_FINGERPRINT)
 
+$(info) $(shell echo $(KOMODO_VERSION) > $(OUT_DIR)/var-file_name)
+
+
