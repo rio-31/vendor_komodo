@@ -5,7 +5,7 @@ CURRENT_BUILD_TYPE ?= nogapps
 CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
 
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
-     KOMODO_BUILD_ZIP_TYPE := VANILLA
+     KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
   else
      KOMODO_BUILD_ZIP_TYPE := GAPPS
 endif
