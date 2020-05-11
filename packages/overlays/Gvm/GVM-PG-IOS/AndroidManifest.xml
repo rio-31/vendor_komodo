@@ -4,10 +4,9 @@
 	android:versionCode="1"
 	android:versionName="1.0">
     <overlay
-		android:priority="1"
+		android:priority="20"
 		android:targetPackage="com.android.systemui"
-		android:category="android.theme.customization.pill_gesture"/>
+		android:isStatic="true"/>
 	<application
-		android:label="PillGesture-IOS"
-		android:hasCode="false"/>
+		android:extractNativeLibs="false"/>
 </manifest>
