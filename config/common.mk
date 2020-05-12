@@ -169,6 +169,10 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    BrightnessSliderOverlay
 
+# Dex Preopt Speed apps
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
 # Some tools
 PRODUCT_PACKAGES += \
     nano \
