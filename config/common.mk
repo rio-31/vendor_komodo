@@ -99,6 +99,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
+# Faceunlock
+$(call inherit-product-if-exists, external/motorola/faceunlock/config.mk)
+
 # G-Apps build type
 ifeq ($(CURRENT_BUILD_TYPE), gapps)
 include vendor/gapps/config.mk
