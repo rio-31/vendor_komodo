@@ -109,7 +109,7 @@ ifeq "$(wildcard $(KERNEL_SRC) )" ""
     ifneq ($(HAS_PREBUILT_KERNEL),)
         $(warning ***************************************************************)
         $(warning * Using prebuilt kernel binary instead of source              *)
-        $(warning * THIS IS DEPRECATED, AND WILL BE DISCONTINUED                *)
+        $(warning * THIS IS DEPRECATED, AND IS NOT ADVISED.                     *)
         $(warning * Please configure your device to download the kernel         *)
         $(warning * source repository to $(KERNEL_SRC))
         $(warning * for more information                                        *)
@@ -183,6 +183,17 @@ ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
     PATH_OVERRIDE += PATH=$(TARGET_KERNEL_CLANG_PATH)/bin:$$PATH LD_LIBRARY_PATH=$(TARGET_KERNEL_CLANG_PATH)/lib64:$$LD_LIBRARY_PATH
     ifeq ($(KERNEL_CC),)
         KERNEL_CC := CC="$(CCACHE_BIN) clang"
+    endif
+    ifeq ($(TARGET_KERNEL_USE_LLD),true)
+        KERNEL_CC += LD=$(TARGET_KERNEL_CLANG_PATH)/bin/ld.lld
+    endif
+    ifneq ($(TARGET_KERNEL_NO_LLVM_BINUTILS),true)
+        KERNEL_CC += AS=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-as
+        KERNEL_CC += AR=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-ar
+        KERNEL_CC += NM=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-nm
+        KERNEL_CC += OBJCOPY=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-objcopy
+        KERNEL_CC += OBJDUMP=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-objdump
+        KERNEL_CC += STRIP=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-strip
     endif
 endif
 
