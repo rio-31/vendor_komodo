@@ -152,11 +152,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     sqlite3
 
-# PixelSetupWizard overlay
-PRODUCT_PACKAGES += \
-    PixelSetupWizardOverlay \
-    PixelSetupWizardAodOverlay
-
 # Themed bootanimation
 TARGET_MISC_BLOCK_OFFSET ?= 0
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
