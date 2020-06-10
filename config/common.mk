@@ -143,11 +143,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.com.google.ime.height_ratio=1.05 \
     ro.com.google.ime.emoji_key=false
 
-# Allows registering device to Google easier for gapps
-# Integrates package for easier Google Pay fixing
-PRODUCT_PACKAGES += \
-    sqlite3
-
 # Themed bootanimation
 TARGET_MISC_BLOCK_OFFSET ?= 0
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
