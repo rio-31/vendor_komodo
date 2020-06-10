@@ -121,10 +121,6 @@ PRODUCT_PACKAGES += \
     mkfs.ntfs \
     mount.ntfs
 
-#Gboard
-PRODUCT_PACKAGES += \
-    GboardGoPreb
-
 #Gvm
 include vendor/komodo/config/gvm.mk
 

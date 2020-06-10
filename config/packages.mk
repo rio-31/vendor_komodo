@@ -13,5 +13,6 @@ PRODUCT_PACKAGES += \
     messaging \
     Gallery2 \
     Dialer \
-    FirefoxLite
+    FirefoxLite \
+    GboardGoPreb
 endif
