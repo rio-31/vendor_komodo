@@ -156,23 +156,9 @@ PRODUCT_PACKAGES += \
     misc_writer_system \
     themed_bootanimation
 
-# MIUI like brightness slider
-#PRODUCT_PACKAGES += \
-#    BrightnessSliderOverlay
-
 # Dex Preopt Speed apps
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
-
-# Some tools
-PRODUCT_PACKAGES += \
-    nano \
-    p7zip \
-    pigz \
-    rsync \
-    unrar \
-    vim \
-    zip
 
 # Branding
 include vendor/komodo/config/branding.mk
