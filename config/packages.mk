@@ -28,5 +28,6 @@ PRODUCT_PACKAGES += \
     Gallery2 \
     Dialer \
     FirefoxLite \
-    GboardGoPreb
+    GboardGoPreb \
+    ExactCalculator
 endif
