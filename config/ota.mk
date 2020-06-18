@@ -9,7 +9,4 @@ KOMODO_PROPERTIES += \
 PRODUCT_PACKAGES += \
     Updates
 
-PRODUCT_COPY_FILES += \
-    vendor/komodo/config/permissions/org.komodo.ota.xml:system/etc/permissions/org.komodo.ota.xml
-
 endif
