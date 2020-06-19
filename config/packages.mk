@@ -18,8 +18,7 @@ PRODUCT_PACKAGES += \
     komodoOverlayStub \
     OmniStyle \
     Longshot \
-    NoCutoutOverlay \
-    KomodoQuickStep
+    NoCutoutOverlay
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
