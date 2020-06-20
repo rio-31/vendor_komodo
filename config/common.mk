@@ -153,7 +153,9 @@ PRODUCT_PACKAGES += \
 
 # Dex Preopt Speed apps
 PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUI
+    SystemUI \
+    Settings \
+    KomodoQuickStep
 
 # Branding
 include vendor/komodo/config/branding.mk
