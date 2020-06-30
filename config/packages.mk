@@ -18,7 +18,13 @@ PRODUCT_PACKAGES += \
     komodoOverlayStub \
     OmniStyle \
     Longshot \
-    NoCutoutOverlay
+    NoCutoutOverlay \
+    OPScreenRecorder \
+    NexusWallpapersStubPrebuilt2019Static \
+    SafetyHubPrebuilt \
+    SettingsIntelligenceGooglePrebuilt \
+    GooglePermissionControllerOverlay \
+    PixelDocumentsUIGoogleOverlay
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)

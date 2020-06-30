@@ -12,4 +12,5 @@
 -->
 <resources>
 <color name="ic_launcher_files_background">#3367D6</color>
+<color name="primary">#ff1a73e8</color>
 </resources>
