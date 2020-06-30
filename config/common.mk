@@ -33,7 +33,7 @@ PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/komodo/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
     vendor/komodo/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
-    
+
 ifneq ($(AB_OTA_PARTITIONS),)
 PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
@@ -51,7 +51,7 @@ PRODUCT_PACKAGES += \
 # Copy all custom init rc files
 $(foreach f,$(wildcard vendor/komodo/prebuilt/common/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
-    
+
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
@@ -60,7 +60,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.config.notification_sound=Popcorn.ogg \
     ro.config.alarm_alert=Bright_morning.ogg
-    
+
 # Dex Preopt Speed apps
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
@@ -74,7 +74,7 @@ PRODUCT_COPY_FILES += \
 # Enable wireless Xbox 360 controller support
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
-    
+
 # G-Apps build type
 ifeq ($(CURRENT_BUILD_TYPE), gapps)
 include vendor/gapps/config.mk
@@ -83,7 +83,7 @@ endif
 # Media
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
-    
+
 # OTA
 include vendor/komodo/config/ota.mk
 # ota allow downgrade
@@ -95,7 +95,6 @@ endif
 # Packages
 include vendor/komodo/config/packages.mk
 
-# Permissions 
 # permission Priv-App
 PRODUCT_COPY_FILES += \
     vendor/komodo/config/permissions/backup.xml:system/etc/sysconfig/backup.xml \
@@ -111,11 +110,11 @@ PRODUCT_COPY_FILES += \
 # permission OmniStyles
 PRODUCT_COPY_FILES += \
     vendor/komodo/prebuilt/etc/permissions/privapp-permissions-omni.xml:system/etc/permissions/privapp-permissions-omni.xml
-    
+
 # power whitelist
 PRODUCT_COPY_FILES += \
     vendor/komodo/config/permissions/custom-power-whitelist.xml:system/etc/sysconfig/custom-power-whitelist.xml
-    
+
 # Properties
 PRODUCT_BRAND ?= Komodo OS
 
@@ -145,7 +144,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.com.google.ime.height_ratio=1.05 \
     ro.com.google.ime.emoji_key=false
-    
+
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.storage_manager.enabled=true
@@ -157,15 +156,17 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     misc_writer_system \
     themed_bootanimation
-    
+
 # Themes & Overlays
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/komodo/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay/common
 # overlays
 include vendor/komodo/config/accents.mk
 include vendor/komodo/config/primary.mk
+
 # GVisualMod
 include vendor/komodo/config/gvm.mk
+
 # Pixel Style
 include vendor/pixelstyle/config.mk
 
