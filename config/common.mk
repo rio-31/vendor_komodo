@@ -236,7 +236,4 @@ include vendor/komodo/config/primary.mk
 # GVisualMod
 include vendor/komodo/config/gvm.mk
 
-# Pixel Style
-include vendor/pixelstyle/config.mk
-
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
