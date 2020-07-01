@@ -9,4 +9,7 @@ KOMODO_PROPERTIES += \
 PRODUCT_PACKAGES += \
     Updates
 
+else
+TARGET_SKIP_OTA_PACKAGE := true
+
 endif
