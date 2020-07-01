@@ -16,21 +16,18 @@ KOMODO_BUILD_DATE_UTC := $(shell date -d '$(KOMODO_DATE_YEAR)-$(KOMODO_DATE_MONT
 KOMODO_BUILD_DATE := $(KOMODO_DATE_YEAR)$(KOMODO_DATE_MONTH)$(KOMODO_DATE_DAY)-$(KOMODO_DATE_HOUR)$(KOMODO_DATE_MINUTE)
 
 # Default, it can be overriden.
-KOMODO_BUILD_TYPE ?= ALPHA
 CURRENT_BUILD_TYPE ?= nogapps
 IS_TEST ?= false
 
 # Komodo Official Release
-ifeq ($(KOMODO_RELEASE), true)
-    ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
-       IS_OFFICIAL=true
+ifndef KOMODO_VARIANT
+  KOMODO_BUILD_TYPE := DEV
+else
+  ifeq ($(KOMODO_VARIANT), RELEASE)
        KOMODO_BUILD_TYPE := RELEASE
-       else
-       KOMODO_BUILD_TYPE := ALPHA
-    endif
-    ifneq ($(IS_TEST), true)
+  else ifeq ($(KOMODO_VARIANT), BETA)
        KOMODO_BUILD_TYPE := BETA
-    endif
+  endif
 endif
 
 # Type of zip 
