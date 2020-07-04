@@ -31,9 +31,9 @@ fi
 touch $Changelog
 
 if [[ $PassedDays == 0 ]]; then
-	echo "Already have today"
-	rm $Changelog{,.bak}
-	exit 0
+	echo "Already have today, but will regenerate one more time"
+	#rm $Changelog{,.bak}
+	#exit 0
 else
 	echo -e "${GREEN}Regenerating log of last ${YELLOW}${PassedDays}${GREEN} days${NC}"
 	if [ -f "${OUT}/system/etc/${Changelog}" ]; then
