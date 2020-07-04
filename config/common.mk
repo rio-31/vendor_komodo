@@ -162,7 +162,6 @@ PRODUCT_COPY_FILES += \
     vendor/komodo/config/permissions/org.lineageos.snap.xml:system/etc/permissions/org.lineageos.snap.xml \
     vendor/komodo/config/permissions/privapp-permissions-system-komodo.xml:system/etc/permissions/privapp-permissions-system-komodo.xml \
     vendor/komodo/config/permissions/privapp-permissions-product-komodo.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-product-komodo.xml \
-    vendor/komodo/config/permissions/privapp-permissions-omni.xml:system/etc/permissions/privapp-permissions-omni.xml 
 
 # permission Google
 PRODUCT_COPY_FILES += \
