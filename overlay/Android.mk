@@ -23,3 +23,6 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay/
 LOCAL_PRODUCT_MODULE := true
 LOCAL_DEX_PREOPT := false
 include $(BUILD_PREBUILT)
+
+include $(call all-makefiles-under,$(LOCAL_PATH))
+
