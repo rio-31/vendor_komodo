@@ -99,10 +99,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
-# Fonts
-# Include {Lato,Rubik} fonts
+# Fonts overlay
+# Include {Lato,Rubik} fonts if..
 $(call inherit-product-if-exists, external/google-fonts/lato/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/rubik/fonts.mk)
+
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,vendor/komodo/fonts,$(TARGET_COPY_OUT_SYSTEM)/fonts)
 
 # Faceunlock
 $(call inherit-product-if-exists, external/motorola/faceunlock/config.mk)
