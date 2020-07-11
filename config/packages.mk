@@ -20,7 +20,7 @@ PRODUCT_PACKAGES += \
     OmniStyle \
     Longshot \
     NoCutoutOverlay \
-    OPScreenRecorder \
+    Recorder \
     NexusWallpapersStubPrebuilt2019Static \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
