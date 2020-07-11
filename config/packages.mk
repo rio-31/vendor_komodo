@@ -15,6 +15,7 @@ PRODUCT_PACKAGES += \
 # Required
 PRODUCT_PACKAGES += \
     ThemePicker \
+    WallpaperPicker2 \
     komodoOverlayStub \
     OmniStyle \
     Longshot \
