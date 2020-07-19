@@ -101,7 +101,8 @@ PRODUCT_COPY_FILES += \
 
 #Fonts
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,vendor/komodo/fonts,$(TARGET_COPY_OUT_SYSTEM)/fonts)
+    $(call find-copy-subdir-files,*,vendor/komodo/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts) \
+    vendor/komodo/prebuilt/system/etc/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml
 
 # Faceunlock
 $(call inherit-product-if-exists, external/motorola/faceunlock/config.mk)
@@ -239,6 +240,7 @@ DEVICE_PACKAGE_OVERLAYS += vendor/komodo/overlay/common
 # overlays
 include vendor/komodo/config/accents.mk
 include vendor/komodo/config/primary.mk
+include vendor/komodo/config/font.mk
 
 # GVisualMod
 include vendor/komodo/config/gvm.mk
