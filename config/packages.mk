@@ -24,8 +24,7 @@ PRODUCT_PACKAGES += \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
     GooglePermissionControllerOverlay \
-    PixelDocumentsUIGoogleOverlay \
-    BluetoothExt
+    PixelDocumentsUIGoogleOverlay
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
