@@ -95,6 +95,7 @@
         <font weight="700" style="normal">GoogleSans-Bold.ttf</font>
         <font weight="700" style="italic">GoogleSans-BoldItalic.ttf</font>
     </family>
+    <alias name="googlesans-light" to="googlesans" weight="300" />
     <alias name="googlesans-medium" to="googlesans" weight="500" />
     <alias name="googlesans-semi-bold" to="googlesans" weight="600" />
     <alias name="googlesans-bold" to="googlesans" weight="700" />
