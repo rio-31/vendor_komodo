@@ -23,7 +23,6 @@ PRODUCT_PACKAGES += \
     NexusWallpapersStubPrebuilt2019Static \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
-    GooglePermissionControllerOverlay \
     PixelDocumentsUIGoogleOverlay
 
 # Extra apps
