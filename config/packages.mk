@@ -19,12 +19,12 @@ PRODUCT_PACKAGES += \
     OmniStyle \
     Longshot \
     NoCutoutOverlay \
-    Recorder \
     NexusWallpapersStubPrebuilt2019Static \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
     GooglePermissionControllerOverlay \
     PixelDocumentsUIGoogleOverlay
+    Recorder
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
