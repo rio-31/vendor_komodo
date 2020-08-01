@@ -1,6 +1,5 @@
 # Define Var
 CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
-LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
 
 # Komodo Version
 KOMODO_PLATFORM_VERSION := 2.7
@@ -17,20 +16,32 @@ KOMODO_BUILD_DATE := $(KOMODO_DATE_YEAR)$(KOMODO_DATE_MONTH)$(KOMODO_DATE_DAY)-$
 
 # Default, it can be overriden.
 CURRENT_BUILD_TYPE ?= nogapps
-IS_TEST ?= false
+KOMODO_BUILD_TYPE ?= DEV
 
 # Komodo Official Release
-ifndef KOMODO_VARIANT
-  KOMODO_BUILD_TYPE := DEV
-else
-  ifeq ($(KOMODO_VARIANT), RELEASE)
-       KOMODO_BUILD_TYPE := RELEASE
-  else ifeq ($(KOMODO_VARIANT), BETA)
-       KOMODO_BUILD_TYPE := BETA
+ifeq ($(KOMODO_VARIANT), RELEASE)
+ LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
+   ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
+      KOMODO_BUILD_TYPE := RELEASE
+      IS_RELEASE := true
+  endif
+  ifneq ($(IS_RELEASE), true)
+      KOMODO_BUILD_TYPE := DEV
   endif
 endif
 
-# Type of zip 
+ifeq ($(KOMODO_VARIANT), BETA)
+LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
+   ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
+      KOMODO_BUILD_TYPE := BETA
+      IS_TEST := true
+   endif
+   ifneq ($(IS_TEST), true)
+     KOMODO_BUILD_TYPE := DEV
+   endif
+endif
+
+# Type of zip
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
      KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
   else
