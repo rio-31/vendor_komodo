@@ -23,7 +23,8 @@ PRODUCT_PACKAGES += \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
     PixelDocumentsUIGoogleOverlay \
-    Recorder
+    Recorder \
+    RetroMusicPlayer
 
 # Extra apps
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
