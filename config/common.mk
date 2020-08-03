@@ -243,7 +243,4 @@ include vendor/komodo/config/accents.mk
 include vendor/komodo/config/primary.mk
 include vendor/komodo/config/font.mk
 
-# GVisualMod
-include vendor/komodo/config/gvm.mk
-
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
