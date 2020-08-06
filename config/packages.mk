@@ -18,7 +18,6 @@ PRODUCT_PACKAGES += \
     komodoOverlayStub \
     OmniStyle \
     Longshot \
-    NoCutoutOverlay \
     NexusWallpapersStubPrebuilt2019Static \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
