@@ -1202,16 +1202,16 @@ function oat2dex() {
     local HOST="$(uname)"
 
     if [ -z "$BAKSMALIJAR" ] || [ -z "$SMALIJAR" ]; then
-        export BAKSMALIJAR="$KOMODO_ROOT"/prebuilts/tools-custom/common/smali/baksmali.jar
-        export SMALIJAR="$KOMODO_ROOT"/prebuilts/tools-custom/common/smali/smali.jar
+        export BAKSMALIJAR="$KOMODO_ROOT"/prebuilts/tools-komodo/common/smali/baksmali.jar
+        export SMALIJAR="$KOMODO_ROOT"/prebuilts/tools-komodo/common/smali/smali.jar
     fi
 
     if [ -z "$VDEXEXTRACTOR" ]; then
-        export VDEXEXTRACTOR="$KOMODO_ROOT"/prebuilts/tools-custom/"${HOST,,}"-x86/bin/vdexExtractor
+        export VDEXEXTRACTOR="$KOMODO_ROOT"/prebuilts/tools-komodo/"${HOST,,}"-x86/bin/vdexExtractor
     fi
 
     if [ -z "$CDEXCONVERTER" ]; then
-        export CDEXCONVERTER="$KOMODO_ROOT"/prebuilts/tools-custom/"${HOST,,}"-x86/bin/compact_dex_converter
+        export CDEXCONVERTER="$KOMODO_ROOT"/prebuilts/tools-komodo/"${HOST,,}"-x86/bin/compact_dex_converter
     fi
 
     # Extract existing boot.oats to the temp folder
