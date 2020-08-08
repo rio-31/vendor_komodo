@@ -10,9 +10,9 @@ Additional functions:
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
 - githubremote:    Add git remote for Komodo OS Github.
-- mka:             Builds using SCHED_BATCH on all processors.
-- mkap:            Builds the module(s) using mka and pushes them to the device.
-- cmka:            Cleans and builds using mka.
+- masak:           Builds using SCHED_BATCH on all processors.
+- mkap:            Builds the module(s) using masak and pushes them to the device.
+- cmka:            Cleans and builds using masak.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
 - reposync:        Parallel repo sync using ionice and SCHED_BATCH.
@@ -55,7 +55,7 @@ function brunch()
 {
     breakfast $*
     if [ $? -eq 0 ]; then
-        mka bacon
+        masak komodo
     else
         echo "No such item in brunch menu. Try 'breakfast'"
         return 1
@@ -670,7 +670,7 @@ function pixelrebase() {
     cd $pwd
 }
 
-function mka() {
+function masak() {
     m -j "$@"
 }
 
@@ -678,19 +678,19 @@ function cmka() {
     if [ ! -z "$1" ]; then
         for i in "$@"; do
             case $i in
-                bacon|otapackage|systemimage)
-                    mka installclean
-                    mka $i
+                komodo|otapackage|systemimage)
+                    masak installclean
+                    masak $i
                     ;;
                 *)
-                    mka clean-$i
-                    mka $i
+                    masak clean-$i
+                    masak $i
                     ;;
             esac
         done
     else
-        mka clean
-        mka
+        masak clean
+        masak
     fi
 }
 
@@ -869,7 +869,7 @@ alias mmp='dopush mm'
 alias mmmp='dopush mmm'
 alias mmap='dopush mma'
 alias mmmap='dopush mmma'
-alias mkap='dopush mka'
+alias mkap='dopush masak'
 alias cmkap='dopush cmka'
 
 function repopick() {
