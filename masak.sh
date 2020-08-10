@@ -90,18 +90,12 @@ fi
 ###################
 
 if [ "$re_sync" = "yes" ]; then
-    rm -rf frameworks/base
-    rm -rf packages/apps/Settings
+    rm -rf .repo/local_manifests
+    rm -rf frameworks/base packages/apps/Settings
     repo init -u https://github.com/Komodo-OS-Rom/manifest -b $BRANCH_MANIFEST
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-    cd frameworks/base
-    git fetch https://github.com/Komodo-OS-Rom/frameworks_base komododev
-    git cherry-pick 6761631450a5e169bad94dc3ccd283d5f62c5a32
-    cd ../../
-    cd packages/apps/Settings
-    git fetch https://github.com/Komodo-OS-Rom/packages_apps_Settings komododev
-    git cherry-pick 909c09b92071f7d9b84cc253dd37c05494e7bda9
-    cd ../../../
+    git clone git@github.com:Komodo-OS-Rom/external_fu.git -b ten external/motorola/faceunlock
+    . external/motorola/faceunlock/regenerate/regenerate.sh
 fi
 
 # Build Variant
