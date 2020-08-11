@@ -63,95 +63,6 @@ export TERM=xterm
     cya=$(tput setaf 6)             #  cyan
     txtrst=$(tput sgr0)             #  Reset
 
-# Verification Environment
-if [ "$BOT_API_KEY" = "" ]; then
-  echo -e ${cya}"Bot Api not set, please setup first"${txtrst}
-  exit 2
-fi
-if [ "$CHAT_ID" = "" ]; then
-  echo -e ${cya}"Env CHAT_ID not set, please setup first"${txtrst}
-  exit 4
-fi
-if [ "$CHAT_ID_SECOND" = "" ]; then
-  echo -e ${cya}"CHAT_ID_SECOND not set, please setup first"${txtrst}
-fi
-if [ "$SF_PASS_RELEASE" = "" ]; then
-  echo -e ${cya}"SF_PASS_RELEASE not set, please setup first"${txtrst}
-  exit 3
-fi
-if [ "$SF_PASS_TEST" = "" ]; then
-  echo -e ${cya}"SF_PASS_TEST not set, please setup first"${txtrst}
-  exit 5
-fi
-if [ "$BRANCH_MANIFEST" = "" ]; then
-  echo -e ${cya}"BRANCH_MANIFEST not set, please setup first"${txtrst}
-  exit 8
-fi
-###################
-
-if [ "$re_sync" = "yes" ]; then
-    rm -rf .repo/local_manifests
-    rm -rf frameworks/base packages/apps/Settings
-    repo init -u https://github.com/Komodo-OS-Rom/manifest -b $BRANCH_MANIFEST
-    repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-    git clone git@github.com:Komodo-OS-Rom/external_fu.git -b ten external/motorola/faceunlock
-    . external/motorola/faceunlock/regenerate/regenerate.sh
-fi
-
-# Build Variant
-
-if [ "$upload_to_sf" = "release" ]; then
-    export KOMODO_VARIANT=RELEASE
-fi
-
-if [ "$upload_to_sf" = "test" ]; then
-    export KOMODO_VARIANT=BETA
-fi
-
-# GAPPS Variant
-
-if [ "$gapps" = "gapps" ]; then
-    export CURRENT_BUILD_TYPE=gapps
-fi
-
-if [ "$gapps" = "nogapps" ]; then
-    export CURRENT_BUILD_TYPE=nogapps
-fi
-
-# CCACHE UMMM!!! Cooks my builds fast
-
-if [ "$use_ccache" = "yes" ]; then
-	echo -e ${blu}"CCACHE is enabled for this build"${txtrst}
-	export CCACHE_EXEC=$(which ccache)
-	export USE_CCACHE=1
-	export CCACHE_DIR=$path_ccache
-	ccache -M 50G
-fi
-
-if [ "$use_ccache" = "clean" ]; then
-	export CCACHE_EXEC=$(which ccache)
-	export CCACHE_DIR=$path_ccache
-	ccache -C
-	export USE_CCACHE=1
-	ccache -M 50G
-	wait
-	echo -e ${grn}"CCACHE Cleared"${txtrst};
-fi
-
-# Its Clean Time
-if [ "$make_clean" = "yes" ]; then
-	make clean # && make clobber
-	wait
-	echo -e ${cya}"OUT dir from your repo deleted"${txtrst};
-fi
-
-# Its Images Clean Time
-if [ "$make_clean" = "installclean" ]; then
-	make installclean
-	wait
-	echo -e ${cya}"Images deleted from OUT dir"${txtrst};
-fi
-
 # Telegram Function
 
 telegram_curl() {
@@ -262,16 +173,31 @@ progress(){
 
 #######
 
-function timeStart() {
-	DATELOG=$(date "+%H%M-%d%m%Y")
-	BUILD_START=$(date +"%s")
-	DATE=`date`
-}
-
-function timeEnd() {
-	BUILD_END=$(date +"%s")
-	DIFF=$(($BUILD_END - $BUILD_START))
-}
+# Verification Environment
+if [ "$BOT_API_KEY" = "" ]; then
+  echo -e ${cya}"Bot Api not set, please setup first"${txtrst}
+  exit 2
+fi
+if [ "$CHAT_ID" = "" ]; then
+  echo -e ${cya}"Env CHAT_ID not set, please setup first"${txtrst}
+  exit 4
+fi
+if [ "$CHAT_ID_SECOND" = "" ]; then
+  echo -e ${cya}"CHAT_ID_SECOND not set, please setup first"${txtrst}
+fi
+if [ "$SF_PASS_RELEASE" = "" ]; then
+  echo -e ${cya}"SF_PASS_RELEASE not set, please setup first"${txtrst}
+  exit 3
+fi
+if [ "$SF_PASS_TEST" = "" ]; then
+  echo -e ${cya}"SF_PASS_TEST not set, please setup first"${txtrst}
+  exit 5
+fi
+if [ "$BRANCH_MANIFEST" = "" ]; then
+  echo -e ${cya}"BRANCH_MANIFEST not set, please setup first"${txtrst}
+  exit 8
+fi
+###################
 
 # Build ROM
 build_message() {
@@ -296,6 +222,80 @@ tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "
 
 <b>Status:</b> $1" --parse_mode "html"
 	fi
+}
+
+if [ "$re_sync" = "yes" ]; then
+    rm -rf .repo/local_manifests
+    rm -rf frameworks/base packages/apps/Settings
+    repo init -u https://github.com/Komodo-OS-Rom/manifest -b $BRANCH_MANIFEST
+    repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+    git clone git@github.com:Komodo-OS-Rom/external_fu.git -b ten external/motorola/faceunlock
+    . external/motorola/faceunlock/regenerate/regenerate.sh
+fi
+
+# Build Variant
+
+if [ "$upload_to_sf" = "release" ]; then
+    export KOMODO_VARIANT=RELEASE
+fi
+
+if [ "$upload_to_sf" = "test" ]; then
+    export KOMODO_VARIANT=BETA
+fi
+
+# GAPPS Variant
+
+if [ "$gapps" = "gapps" ]; then
+    export CURRENT_BUILD_TYPE=gapps
+fi
+
+if [ "$gapps" = "nogapps" ]; then
+    export CURRENT_BUILD_TYPE=nogapps
+fi
+
+# CCACHE UMMM!!! Cooks my builds fast
+
+if [ "$use_ccache" = "yes" ]; then
+	echo -e ${blu}"CCACHE is enabled for this build"${txtrst}
+	export CCACHE_EXEC=$(which ccache)
+	export USE_CCACHE=1
+	export CCACHE_DIR=$path_ccache
+	ccache -M 50G
+fi
+
+if [ "$use_ccache" = "clean" ]; then
+	export CCACHE_EXEC=$(which ccache)
+	export CCACHE_DIR=$path_ccache
+	ccache -C
+	export USE_CCACHE=1
+	ccache -M 50G
+	wait
+	echo -e ${grn}"CCACHE Cleared"${txtrst};
+fi
+
+# Its Clean Time
+if [ "$make_clean" = "yes" ]; then
+	make clean # && make clobber
+	wait
+	echo -e ${cya}"OUT dir from your repo deleted"${txtrst};
+fi
+
+# Its Images Clean Time
+if [ "$make_clean" = "installclean" ]; then
+	make installclean
+	wait
+	echo -e ${cya}"Images deleted from OUT dir"${txtrst};
+fi
+
+function timeStart() {
+	DATELOG=$(date "+%H%M-%d%m%Y")
+	BUILD_START=$(date +"%s")
+	DATE=`date`
+}
+
+function timeEnd() {
+	BUILD_END=$(date +"%s")
+	DIFF=$(($BUILD_END - $BUILD_START))
 }
 
 function statusBuild() {
