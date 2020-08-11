@@ -173,6 +173,21 @@ progress(){
 
 #######
 
+# Verify important
+if [ "$BOT_API_KEY" = "" ]; then
+  echo -e ${cya}"Bot Api not set, please setup first"${txtrst}
+  exit 2
+fi
+if [ "$CHAT_ID" = "" ]; then
+  echo -e ${cya}"Env CHAT_ID not set, please setup first"${txtrst}
+  exit 4
+fi
+if [ "$CHAT_ID_SECOND" = "" ]; then
+  echo -e ${cya}"CHAT_ID_SECOND not set, please setup first"${txtrst}
+fi
+
+#########
+
 # Build Message
 build_message() {
 	if [ "$CI_MESSAGE_ID" = "" ]; then
@@ -201,17 +216,6 @@ tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "
 ##########
 
 # Verification Environment
-if [ "$BOT_API_KEY" = "" ]; then
-  echo -e ${cya}"Bot Api not set, please setup first"${txtrst}
-  exit 2
-fi
-if [ "$CHAT_ID" = "" ]; then
-  echo -e ${cya}"Env CHAT_ID not set, please setup first"${txtrst}
-  exit 4
-fi
-if [ "$CHAT_ID_SECOND" = "" ]; then
-  echo -e ${cya}"CHAT_ID_SECOND not set, please setup first"${txtrst}
-fi
 if [ "$SF_PASS_RELEASE" = "" ]; then
   echo -e ${cya}"SF_PASS_RELEASE not set, please setup first"${txtrst}
   exit 3
