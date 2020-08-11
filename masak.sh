@@ -173,6 +173,33 @@ progress(){
 
 #######
 
+# Build Message
+build_message() {
+	if [ "$CI_MESSAGE_ID" = "" ]; then
+CI_MESSAGE_ID=$(tg_send_message --chat_id "$CHAT_ID" --text "<b>====== Starting Build Komodo 🦎 ======</b>
+<b>ROM Name:</b> <code>${ROM_NAME}</code>
+<b>Branch:</b> <code>${BRANCH_MANIFEST}</code>
+<b>Device:</b> <code>${DEVICE}</code>
+<b>Command:</b> <code>$target_command</code>
+<b>Upload to SF:</b> <code>$upload_to_sf</code>
+<b>Started at</b> <code>$DATE</code>
+
+<b>Status:</b> $1" --parse_mode "html" | jq .result.message_id)
+	else
+tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "<b>====== Starting Build Komodo 🦎 ======</b>
+<b>ROM Name:</b> <code>${ROM_NAME}</code>
+<b>Branch:</b> <code>${BRANCH_MANIFEST}</code>
+<b>Device:</b> <code>${DEVICE}</code>
+<b>Command:</b> <code>$target_command</code>
+<b>Upload to SF:</b> <code>$upload_to_sf</code>
+<b>Started at</b> <code>$DATE</code>
+
+<b>Status:</b> $1" --parse_mode "html"
+	fi
+}
+
+##########
+
 # Verification Environment
 if [ "$BOT_API_KEY" = "" ]; then
   echo -e ${cya}"Bot Api not set, please setup first"${txtrst}
@@ -198,31 +225,6 @@ if [ "$BRANCH_MANIFEST" = "" ]; then
   exit 8
 fi
 ###################
-
-# Build ROM
-build_message() {
-	if [ "$CI_MESSAGE_ID" = "" ]; then
-CI_MESSAGE_ID=$(tg_send_message --chat_id "$CHAT_ID" --text "<b>====== Starting Build Komodo 🦎 ======</b>
-<b>ROM Name:</b> <code>${ROM_NAME}</code>
-<b>Branch:</b> <code>${BRANCH_MANIFEST}</code>
-<b>Device:</b> <code>${DEVICE}</code>
-<b>Command:</b> <code>$target_command</code>
-<b>Upload to SF:</b> <code>$upload_to_sf</code>
-<b>Started at</b> <code>$DATE</code>
-
-<b>Status:</b> $1" --parse_mode "html" | jq .result.message_id)
-	else
-tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "<b>====== Starting Build Komodo 🦎 ======</b>
-<b>ROM Name:</b> <code>${ROM_NAME}</code>
-<b>Branch:</b> <code>${BRANCH_MANIFEST}</code>
-<b>Device:</b> <code>${DEVICE}</code>
-<b>Command:</b> <code>$target_command</code>
-<b>Upload to SF:</b> <code>$upload_to_sf</code>
-<b>Started at</b> <code>$DATE</code>
-
-<b>Status:</b> $1" --parse_mode "html"
-	fi
-}
 
 if [ "$re_sync" = "yes" ]; then
     rm -rf .repo/local_manifests
