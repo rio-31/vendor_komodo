@@ -308,6 +308,7 @@ fi
 ###################
 
 if [ "$re_sync" = "yes" ]; then
+    build_message "Sync repo"
     rm -rf .repo/local_manifests
     rm -rf frameworks/base packages/apps/Settings
     repo init -u https://github.com/Komodo-OS-Rom/manifest -b $BRANCH_MANIFEST
@@ -358,6 +359,7 @@ fi
 
 # Its Clean Time
 if [ "$make_clean" = "yes" ]; then
+        build_message "make clean"
 	make clean # && make clobber
 	wait
 	echo -e ${cya}"OUT dir from your repo deleted"${txtrst};
@@ -365,6 +367,7 @@ fi
 
 # Its Images Clean Time
 if [ "$make_clean" = "installclean" ]; then
+        build_message "make installclean"
 	make installclean
 	wait
 	echo -e ${cya}"Images deleted from OUT dir"${txtrst};
