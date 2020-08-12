@@ -140,10 +140,10 @@ progress(){
     sleep 10;
 
     while [ 1 ]; do
-        if [ ${retVal} -ne 0 ]; then
+        if [[ ${retVal} -ne 0 ]]; then
             exit ${retVal}
         fi
- 
+
         # Get latest percentage
         PERCENTAGE=$(cat $BUILDLOG | tail -n 1 | awk '{ print $2 }')
         NUMBER=$(echo ${PERCENTAGE} | sed 's/[^0-9]*//g')
