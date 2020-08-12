@@ -63,6 +63,18 @@ export TERM=xterm
     cya=$(tput setaf 6)             #  cyan
     txtrst=$(tput sgr0)             #  Reset
 
+# Time function
+function timeStart() {
+	DATELOG=$(date "+%H%M-%d%m%Y")
+	BUILD_START=$(date +"%s")
+	DATE=`date`
+}
+
+function timeEnd() {
+	BUILD_END=$(date +"%s")
+	DIFF=$(($BUILD_END - $BUILD_START))
+}
+
 # Telegram Function
 
 telegram_curl() {
@@ -189,6 +201,7 @@ fi
 #########
 
 # Build Message
+timeStart
 build_message() {
 	if [ "$CI_MESSAGE_ID" = "" ]; then
 CI_MESSAGE_ID=$(tg_send_message --chat_id "$CHAT_ID" --text "<b>====== Starting Build Komodo 🦎 ======</b>
@@ -373,18 +386,6 @@ if [ "$make_clean" = "installclean" ]; then
 	echo -e ${cya}"Images deleted from OUT dir"${txtrst};
 fi
 
-function timeStart() {
-	DATELOG=$(date "+%H%M-%d%m%Y")
-	BUILD_START=$(date +"%s")
-	DATE=`date`
-}
-
-function timeEnd() {
-	BUILD_END=$(date +"%s")
-	DIFF=$(($BUILD_END - $BUILD_START))
-}
-
-timeStart
 BUILDLOG="$CDIR/out/${ROM_NAME}-${DEVICE}-${DATELOG}.log"
 # time to build bro
 build_message "Staring broo...🔥"
