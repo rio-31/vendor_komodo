@@ -231,12 +231,12 @@ tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "
 # Build status checker
 function statusBuild() {
     if [[ $retVal -eq 8 ]]; then
-        build_message "Build Aborted 💔 with Code Exit ${retVal}, BRANCH_MANIFEST not set on jenkins.
+        build_message "Build Aborted 😡 with Code Exit ${retVal}, BRANCH_MANIFEST not set on jenkins.
+
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
 Check channel for more info.
 Sudah kubilang yang teliti 😡"
-        build_message "Build aborted 😡"
         echo "Build Aborted"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
         LOGTRIM="$CDIR/out/log_trimmed.log"
@@ -245,11 +245,11 @@ Sudah kubilang yang teliti 😡"
         exit $retVal
     fi
     if [[ $retVal -eq 3 ]]; then
-        build_message "Build Aborted 💔 with Code Exit ${retVal}, SF_PASS_RELEASE not set on jenkins.
+        build_message "Build Aborted 😤 with Code Exit ${retVal}, SF_PASS_RELEASE not set on jenkins.
+
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
 Check channel for more info"
-        build_message "Build aborted 😤"
         echo "Build Aborted"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
         LOGTRIM="$CDIR/out/log_trimmed.log"
@@ -258,12 +258,12 @@ Check channel for more info"
         exit $retVal
     fi
     if [[ $retVal -eq 5 ]]; then
-        build_message "Build Aborted 💔 with Code Exit ${retVal}, SF_PASS_TEST not set on jenkins.
+        build_message "Build Aborted 😑 with Code Exit ${retVal}, SF_PASS_TEST not set on jenkins.
+
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
 Check channel for more info"
-        build_message "Build aborted"
-        echo "Build Aborted 😑"
+        echo "Build Aborted"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
         LOGTRIM="$CDIR/out/log_trimmed.log"
         sed -n '/FAILED:/,//p' $BUILDLOG &> $LOGTRIM
@@ -271,11 +271,11 @@ Check channel for more info"
         exit $retVal
     fi
     if [[ $retVal -eq 141 ]]; then
-        build_message "Build Aborted 💔 with Code Exit ${retVal}, See log.
+        build_message "Build Aborted 👎 with Code Exit ${retVal}, See log.
+
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
 Check channel for more info"
-        build_message "Build aborted 👎"
         echo "Build Aborted"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
         LOGTRIM="$CDIR/out/log_trimmed.log"
@@ -285,10 +285,10 @@ Check channel for more info"
     fi
     if [[ $retVal -ne 0 ]]; then
         build_message "Build Error 💔 with Code Exit ${retVal}, See log.
+
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Error 💔 with Code Exit ${retVal}.
 Check channel for more info"
-        build_message "Build error 😭"
         echo "Build Error"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
         LOGTRIM="$CDIR/out/log_trimmed.log"
@@ -298,7 +298,7 @@ Check channel for more info"
     fi
     OTA=$(find $OUT -name "$ROM_NAME-*json")
     tg_send_document --chat_id "$CHAT_ID" --document "$OTA" --reply_to_message_id "$CI_MESSAGE_ID"
-    build_message "Build Success ❤️"
+    build_message "Build success ❤️"
     tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Success ❤️.
 Check channel for more info"
 }
