@@ -231,10 +231,10 @@ tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "
 # Build status checker
 function statusBuild() {
     if [[ $retVal -eq 8 ]]; then
-        tg_send_message --chat_id "$CHAT_ID" --text "Build Aborted 💔 with Code Exit ${retVal}, BRANCH_MANIFEST not set on jenkins.
+        build_message "Build Aborted 💔 with Code Exit ${retVal}, BRANCH_MANIFEST not set on jenkins.
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
-Check channel.
+Check channel for more info.
 Sudah kubilang yang teliti 😡"
         build_message "Build aborted 😡"
         echo "Build Aborted"
@@ -245,10 +245,10 @@ Sudah kubilang yang teliti 😡"
         exit $retVal
     fi
     if [[ $retVal -eq 3 ]]; then
-        tg_send_message --chat_id "$CHAT_ID" --text "Build Aborted 💔 with Code Exit ${retVal}, SF_PASS_RELEASE not set on jenkins.
+        build_message "Build Aborted 💔 with Code Exit ${retVal}, SF_PASS_RELEASE not set on jenkins.
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
-Check channel"
+Check channel for more info"
         build_message "Build aborted 😤"
         echo "Build Aborted"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
@@ -258,10 +258,10 @@ Check channel"
         exit $retVal
     fi
     if [[ $retVal -eq 5 ]]; then
-        tg_send_message --chat_id "$CHAT_ID" --text "Build Aborted 💔 with Code Exit ${retVal}, SF_PASS_TEST not set on jenkins.
+        build_message "Build Aborted 💔 with Code Exit ${retVal}, SF_PASS_TEST not set on jenkins.
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
-Check channel"
+Check channel for more info"
         build_message "Build aborted"
         echo "Build Aborted 😑"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
@@ -271,10 +271,10 @@ Check channel"
         exit $retVal
     fi
     if [[ $retVal -eq 141 ]]; then
-        tg_send_message --chat_id "$CHAT_ID" --text "Build Aborted 💔 with Code Exit ${retVal}, See log.
+        build_message "Build Aborted 💔 with Code Exit ${retVal}, See log.
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
         tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Aborted 💔 with Code Exit ${retVal}.
-Check channel"
+Check channel for more info"
         build_message "Build aborted 👎"
         echo "Build Aborted"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
@@ -284,9 +284,10 @@ Check channel"
         exit $retVal
     fi
     if [[ $retVal -ne 0 ]]; then
-        tg_send_message --chat_id "$CHAT_ID" --text "Build Error 💔 with Code Exit ${retVal}, See log.
+        build_message "Build Error 💔 with Code Exit ${retVal}, See log.
 Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
-        tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Error 💔 with Code Exit ${retVal}. smn"
+        tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Error 💔 with Code Exit ${retVal}.
+Check channel for more info"
         build_message "Build error 😭"
         echo "Build Error"
         tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_id "$CI_MESSAGE_ID"
@@ -298,9 +299,8 @@ Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
     OTA=$(find $OUT -name "$ROM_NAME-*json")
     tg_send_document --chat_id "$CHAT_ID" --document "$OTA" --reply_to_message_id "$CI_MESSAGE_ID"
     build_message "Build Success ❤️"
-    tg_send_message --chat_id "$CHAT_ID" --text "Build Success ❤️.
-Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
-    tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Success ❤️. smn"
+    tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Success ❤️.
+Check channel for more info"
 }
 
 ##############
@@ -439,7 +439,8 @@ cd $DEVICE
 put $FILEPATH
 exit
 EOF
-    build_message "Uploaded on : https://sourceforge.net/projects/komodos-rom/files/$DEVICE/$FILENAME.zip/download"
+    build_message "Uploaded on : https://sourceforge.net/projects/komodos-rom/files/$DEVICE/$FILENAME.zip/download
+Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 fi
 
 if [ "$upload_to_sf" = "test" ]; then
@@ -450,7 +451,8 @@ cd Test
 put $FILEPATH
 exit
 EOF
-    build_message "Uploaded on : https://sourceforge.net/projects/krypton-project/files/Test/$FILENAME.zip/download"
+    build_message "Uploaded on : https://sourceforge.net/projects/krypton-project/files/Test/$FILENAME.zip/download
+Total time elapsed: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
 fi
 
 exit 0
