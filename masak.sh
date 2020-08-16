@@ -159,7 +159,7 @@ progress(){
         # Get latest percentage
         PERCENTAGE=$(cat $BUILDLOG | tail -n 1 | awk '{ print $2 }')
         NUMBER=$(echo ${PERCENTAGE} | sed 's/[^0-9]*//g')
-        TEXT=( Building bUilding buIlding buiLding builDing buildIng buildiNg buildinG ) 
+        TEXT=( bUilding buIlding buiLding builDing buildIng buildiNg buildinG Building ) 
 
         # Report percentage to the $CHAT_ID
         if [ "${NUMBER}" != "" ]; then
