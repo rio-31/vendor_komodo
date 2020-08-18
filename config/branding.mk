@@ -16,7 +16,6 @@ KOMODO_BUILD_DATE_UTC := $(shell date -d '$(KOMODO_DATE_YEAR)-$(KOMODO_DATE_MONT
 KOMODO_BUILD_DATE := $(KOMODO_DATE_YEAR)$(KOMODO_DATE_MONTH)$(KOMODO_DATE_DAY)-$(KOMODO_DATE_HOUR)$(KOMODO_DATE_MINUTE)
 
 # Default, it can be overriden.
-CURRENT_BUILD_TYPE ?= nogapps
 IS_TEST ?= false
 
 # Komodo Official Release
@@ -33,8 +32,16 @@ endif
 # Type of zip 
 ifeq ($(CURRENT_BUILD_TYPE), nogapps)
      KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
-  else
+else ifeq ($(CURRENT_BUILD_TYPE), gapps)
      KOMODO_BUILD_ZIP_TYPE := GAPPS
+else
+    ifeq ($(CURRENT_BUILD_TYPE),)
+        $(warning "Komodo vendor: CURRENT_BUILD_TYPE is undefined, assuming nogapps")
+    else
+        $(warning "Komodo vendor: Current build gapps is not that value, forcing nogapps")
+    endif
+    KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
+    CURRENT_BUILD_TYPE := nogapps
 endif
 
 KOMODO_VERSION := KomodoOS-$(KOMODO_BUILD)-$(KOMODO_PLATFORM_VERSION)-$(KOMODO_BUILD_DATE)-$(KOMODO_BUILD_TYPE)-$(KOMODO_BUILD_ZIP_TYPE)
