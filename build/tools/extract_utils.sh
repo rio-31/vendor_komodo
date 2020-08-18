@@ -871,22 +871,19 @@ function write_blueprint_header() {
     [ "$COMMON" -eq 1 ] && local DEVICE="$DEVICE_COMMON"
 
     printf "/**\n" > $1
-    if [ $INITIAL_COPYRIGHT_YEAR -lt 2019 ]; then
+    NUM_REGEX='^[0-9]+$'
+    if [[ ! $INITIAL_COPYRIGHT_YEAR =~ $NUM_REGEX ]] || [ $INITIAL_COPYRIGHT_YEAR -lt 2019 ]; then
         BLUEPRINT_INITIAL_COPYRIGHT_YEAR=2019
     else
         BLUEPRINT_INITIAL_COPYRIGHT_YEAR=$INITIAL_COPYRIGHT_YEAR
     fi
 
-    NUM_REGEX='^[0-9]+$'
     if [ $BLUEPRINT_INITIAL_COPYRIGHT_YEAR -eq $YEAR ]; then
-        printf " * Copyright (C) $YEAR The LineageOS Project\n" >> $1
-        printf " * Copyright (C) $YEAR The KomodoOS Project\n" >> $1
+        printf " * Copyright (C) $YEAR The Komodo-OS-Rom Project\n" >> $1
     elif [ $BLUEPRINT_INITIAL_COPYRIGHT_YEAR -le 2019 ]; then
-        printf " * Copyright (C) 2019-$YEAR The LineageOS Project\n" >> $1
-        printf " * Copyright (C) 2019-$YEAR The KomodoOS Project\n" >> $1
+        printf " * Copyright (C) 2019-$YEAR The Komodo-OS-Rom Project\n" >> $1
     else
-        printf " * Copyright (C) $BLUEPRINT_INITIAL_COPYRIGHT_YEAR-$YEAR The LineageOS Project\n" >> $1
-        printf " * Copyright (C) $BLUEPRINT_INITIAL_COPYRIGHT_YEAR-$YEAR The KomodoOS Project\n" >> $1
+        printf " * Copyright (C) $BLUEPRINT_INITIAL_COPYRIGHT_YEAR-$YEAR The Komodo-OS-Rom Project\n" >> $1
     fi
 
     cat << EOF >> $1
