@@ -3,7 +3,7 @@ CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
 
 # Komodo Version
 KOMODO_PLATFORM_VERSION := 2.7
-KOMODO_VERSION_PROP := $(KOMODO_PLATFORM_VERSION)
+KOMODO_VERSION_NAME := NKRI75
 
 # Set all versions
 KOMODO_DATE_YEAR := $(shell date -u +%Y)
@@ -62,13 +62,14 @@ TARGET_PRODUCT_SHORT := $(subst aosp_,,$(KOMODO_BUILD))
 ROM_FINGERPRINT := KomodoOS/$(KOMODO_PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(KOMODO_BUILD_DATE)
 
 KOMODO_PROPERTIES := \
-    org.komodo.version=$(KOMODO_VERSION_PROP) \
+    org.komodo.version=$(KOMODO_PLATFORM_VERSION) \
     org.komodo.version.display=$(KOMODO_VERSION) \
     org.komodo.build_date=$(KOMODO_BUILD_DATE) \
     org.komodo.build_date_utc=$(KOMODO_BUILD_DATE_UTC) \
     org.komodo.build_type=$(KOMODO_BUILD_TYPE) \
     org.komodo.ziptype=$(KOMODO_BUILD_ZIP_TYPE) \
-    org.komodo.fingerprint=$(ROM_FINGERPRINT)
+    org.komodo.fingerprint=$(ROM_FINGERPRINT) \
+    org.komodo.version.name=$(KOMODO_VERSION_NAME)
 
 # Variable file name for jenkins
 $(info) $(shell echo $(KOMODO_VERSION) > $(OUT_DIR)/var-file_name)
