@@ -210,6 +210,7 @@ CI_MESSAGE_ID=$(tg_send_message --chat_id "$CHAT_ID" --text "<b>====== Starting 
 <b>Device:</b> <code>${DEVICE}</code>
 <b>Command:</b> <code>$target_command</code>
 <b>Upload to SF:</b> <code>$upload_to_sf</code>
+<b>Running on:</b> <code>$server</code>
 <b>Started at</b> <code>$DATE</code>
 
 <b>Status:</b> $1" --parse_mode "html" | jq .result.message_id)
@@ -220,6 +221,7 @@ tg_edit_message_text --chat_id "$CHAT_ID" --message_id "$CI_MESSAGE_ID" --text "
 <b>Device:</b> <code>${DEVICE}</code>
 <b>Command:</b> <code>$target_command</code>
 <b>Upload to SF:</b> <code>$upload_to_sf</code>
+<b>Running on:</b> <code>$server</code>
 <b>Started at</b> <code>$DATE</code>
 
 <b>Status:</b> $1" --parse_mode "html"
