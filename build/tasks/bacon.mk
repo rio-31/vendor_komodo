@@ -32,20 +32,20 @@ komodo: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) $(MD5SUM) $(KOMODO_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(KOMODO_TARGET_PACKAGE).md5sum
 	$(hide) ./vendor/komodo/tools/generate_json_build_info.sh $(KOMODO_TARGET_PACKAGE)
 	@echo -e ""
-	@echo -e "Finish ${cya}Building ${bldcya}Komodo ${txtrst}";
+	@echo -e ${CL_RED}"Finish ${cya}Building ${bldcya}Komodo ${txtrst}"${CL_RED}
 	@echo -e ""
-	@echo -e ${CL_GRN}"	▄▄   ▄▄▄    ▄▄▄▄    ▄▄▄  ▄▄▄    ▄▄▄▄    ▄▄▄▄▄       ▄▄▄▄	"
-	@echo -e ${CL_GRN}"	██  ██▀    ██▀▀██   ███  ███   ██▀▀██   ██▀▀▀██    ██▀▀██	"
-	@echo -e ${CL_GRN}"	██▄██     ██    ██  ████████  ██    ██  ██    ██  ██    ██	"
-	@echo -e ${CL_GRN}"	█████     ██    ██  ██ ██ ██  ██    ██  ██    ██  ██    ██	"
-	@echo -e ${CL_GRN}"	██  ██▄   ██    ██  ██ ▀▀ ██  ██    ██  ██    ██  ██    ██	"
-	@echo -e ${CL_GRN}"	██   ██▄   ██▄▄██   ██    ██   ██▄▄██   ██▄▄▄██    ██▄▄██	"
-	@echo -e ${CL_GRN}"	▀▀    ▀▀    ▀▀▀▀    ▀▀    ▀▀    ▀▀▀▀    ▀▀▀▀▀       ▀▀▀▀	"
+	@echo -e ${CL_GRN}"	▄▄   ▄▄▄    ▄▄▄▄    ▄▄▄  ▄▄▄    ▄▄▄▄    ▄▄▄▄▄       ▄▄▄▄	"${CL_GRN}
+	@echo -e ${CL_GRN}"	██  ██▀    ██▀▀██   ███  ███   ██▀▀██   ██▀▀▀██    ██▀▀██	"${CL_GRN}
+	@echo -e ${CL_GRN}"	██▄██     ██    ██  ████████  ██    ██  ██    ██  ██    ██	"${CL_GRN}
+	@echo -e ${CL_GRN}"	█████     ██    ██  ██ ██ ██  ██    ██  ██    ██  ██    ██	"${CL_GRN}
+	@echo -e ${CL_GRN}"	██  ██▄   ██    ██  ██ ▀▀ ██  ██    ██  ██    ██  ██    ██	"${CL_GRN}
+	@echo -e ${CL_GRN}"	██   ██▄   ██▄▄██   ██    ██   ██▄▄██   ██▄▄▄██    ██▄▄██	"${CL_GRN}
+	@echo -e ${CL_GRN}"	▀▀    ▀▀    ▀▀▀▀    ▀▀    ▀▀    ▀▀▀▀    ▀▀▀▀▀       ▀▀▀▀	"${CL_GRN}
 	@echo -e ""
-	@echo -e "================================================"
-	@echo -e ${CL_RED} "Komodo Dragon Islands"
-	@echo -e "zip: "$(KOMODO_TARGET_PACKAGE)
-	@echo -e "md5: `cat $(KOMODO_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"
-	@echo -e "size:`ls -lah $(KOMODO_TARGET_PACKAGE) | cut -d ' ' -f 5`"
-	@echo -e "================================================"
+	@echo -e ${CL_RED}"================================================"${CL_RED}
+	@echo -e ${CL_RED}"Komodo Dragon Islands"${CL_RED}
+	@echo -e ${CLR_YLW}"zip: "$(KOMODO_TARGET_PACKAGE)${CLR_YLW}
+	@echo -e ${CLR_YLW}"md5: `cat $(KOMODO_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CLR_YLW}
+	@echo -e ${CLR_YLW}"size:`ls -lah $(KOMODO_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CLR_YLW}
+	@echo -e ${CL_RED}"================================================"${CL_RED}
 	@echo -e ""
