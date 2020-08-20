@@ -298,8 +298,10 @@ Check channel for more info"
         tg_send_document --chat_id "$CHAT_ID" --document "$LOGTRIM" --reply_to_message_id "$CI_MESSAGE_ID"
         exit $retVal
     fi
-    OTA=$(find $OUT -name "$ROM_NAME-*json")
-    tg_send_document --chat_id "$CHAT_ID" --document "$OTA" --reply_to_message_id "$CI_MESSAGE_ID"
+    if [ "$target_command" = "komodo" ]; then
+       OTA=$(find $OUT -name "$ROM_NAME-*json")
+       tg_send_document --chat_id "$CHAT_ID" --document "$OTA" --reply_to_message_id "$CI_MESSAGE_ID"
+    fi
     build_message "Build success ❤️"
     tg_send_message --chat_id "$CHAT_ID_SECOND" --text "Build Success ❤️.
 Check channel for more info"
