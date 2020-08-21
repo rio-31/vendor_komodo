@@ -246,4 +246,7 @@ include vendor/komodo/config/font.mk
 #G-VisualMod
 include vendor/komodo/config/gvm.mk
 
+# Plugins
+-include packages/apps/Plugins/plugins.mk
+
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
