@@ -434,7 +434,6 @@ fi
 
 if [ "$upload_to_sf" = "release" ]; then
     build_message "Uploading to sourceforge release 📤"
-    mv "$FILEPATH" $KOMODOFILE/komodo-release/$DEVICE/
     sshpass -p '$SF_PASS_RELEASE' sftp -oBatchMode=no komodos@frs.sourceforge.net:/home/frs/project/komodos-rom > /dev/null 2>&1 <<EOF
 cd $DEVICE
 put $FILEPATH
@@ -446,7 +445,6 @@ fi
 
 if [ "$upload_to_sf" = "test" ]; then
     build_message "Uploading to sourceforge test 📤"
-    mv "$FILEPATH" $KOMODOFILE/komodo-beta/$DEVICE/
     sshpass -p '$SF_PASS_TEST' sftp -oBatchMode=no kry9ton@frs.sourceforge.net:/home/frs/project/krypton-project > /dev/null 2>&1 <<EOF
 cd Test
 put $FILEPATH
