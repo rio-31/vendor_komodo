@@ -410,8 +410,8 @@ tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_
 # Detecting file
 FILENAME=$(cat $CDIR/out/var-file_name)
 if [ "$target_command" = "komodo" ]; then
-    #FILEPATH=$(find "$OUT" -iname "${ROM_NAME}*${DEVICE}*zip")
-    FILEPATH="$OUT/$FILENAME.zip"
+    FILEPATH=$(find "$OUT" -iname "${ROM_NAME}*${DEVICE}*zip")
+    #FILEPATH="$OUT/$FILENAME.zip"
 elif [ "$target_command" = "bootimage" ]; then
     FILEBOOT=$(find "$OUT" -iname "boot.img" 2>/dev/null)
         build_message "Zipping $target_command"
