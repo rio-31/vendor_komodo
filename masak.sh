@@ -410,8 +410,8 @@ tg_send_document --chat_id "$CHAT_ID" --document "$BUILDLOG" --reply_to_message_
 # Detecting file
 FILENAME=$(cat $CDIR/out/var-file_name)
 if [ "$target_command" = "komodo" ]; then
-    FILEPATH=$(find "$OUT" -iname "${ROM_NAME}*${DEVICE}*zip")
-    #FILEPATH="$OUT/$FILENAME.zip"
+    #FILEPATH=$(find "$OUT" -iname "${ROM_NAME}*${DEVICE}*zip")
+    FILEPATH="$OUT/$FILENAME.zip"
 elif [ "$target_command" = "bootimage" ]; then
     FILEBOOT=$(find "$OUT" -iname "boot.img" 2>/dev/null)
         build_message "Zipping $target_command"
@@ -434,7 +434,7 @@ fi
 
 if [ "$upload_to_sf" = "release" ]; then
     build_message "Uploading to sourceforge release 📤"
-    sshpass -p '$SF_PASS_RELEASE' sftp -oBatchMode=no komodos@frs.sourceforge.net:/home/frs/project/komodos-rom > /dev/null 2>&1 <<EOF
+    sshpass -p "$SF_PASS_RELEASE" sftp -oBatchMode=no komodos@frs.sourceforge.net:/home/frs/project/komodos-rom > /dev/null 2>&1 <<EOF
 cd $DEVICE
 put $FILEPATH
 exit
@@ -445,7 +445,7 @@ fi
 
 if [ "$upload_to_sf" = "test" ]; then
     build_message "Uploading to sourceforge test 📤"
-    sshpass -p '$SF_PASS_TEST' sftp -oBatchMode=no kry9ton@frs.sourceforge.net:/home/frs/project/krypton-project > /dev/null 2>&1 <<EOF
+    sshpass -p "$SF_PASS_TEST" sftp -oBatchMode=no kry9ton@frs.sourceforge.net:/home/frs/project/krypton-project > /dev/null 2>&1 <<EOF
 cd Test
 put $FILEPATH
 exit
