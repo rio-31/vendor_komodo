@@ -41,18 +41,21 @@ LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
 endif
 
 # Type of zip
-ifeq ($(CURRENT_BUILD_TYPE), nogapps)
+ifndef
      KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
+ifeq ($(CURRENT_BUILD_TYPE), microg)
+     KOMODO_BUILD_ZIP_TYPE := MICROG
 else ifeq ($(CURRENT_BUILD_TYPE), gapps)
      KOMODO_BUILD_ZIP_TYPE := GAPPS
 else
     ifeq ($(CURRENT_BUILD_TYPE),)
         $(warning "Komodo vendor: CURRENT_BUILD_TYPE is undefined, assuming nogapps")
     else
-        $(warning "Komodo vendor: Current build gapps is not that value, forcing nogapps")
+        $(warning "Komodo vendor: Incorrect value for CURRENT_BUILD_TYPE, forcing nogapps")
     endif
     KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
     CURRENT_BUILD_TYPE := nogapps
+endif
 endif
 
 KOMODO_VERSION := KomodoOS-$(KOMODO_BUILD)-$(KOMODO_PLATFORM_VERSION)-$(KOMODO_BUILD_DATE)-$(KOMODO_BUILD_TYPE)-$(KOMODO_BUILD_ZIP_TYPE)

@@ -142,6 +142,12 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
+#MicroG
+ifeq ($(USE_MICROG),true)
+include prebuilts/prebuiltapks/microg.mk
+PRODUCT_PACKAGES += bromite-webview
+endif
+
 # OTA
 include vendor/komodo/config/ota.mk
 
