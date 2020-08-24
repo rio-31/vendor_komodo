@@ -18,8 +18,9 @@ KOMODO_BUILD_DATE := $(KOMODO_DATE_YEAR)$(KOMODO_DATE_MONTH)$(KOMODO_DATE_DAY)-$
 KOMODO_BUILD_TYPE ?= DEV
 
 # Komodo Official Release
+LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
+
 ifeq ($(KOMODO_VARIANT), RELEASE)
- LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
    ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
       KOMODO_BUILD_TYPE := RELEASE
       IS_RELEASE := true
@@ -30,7 +31,6 @@ ifeq ($(KOMODO_VARIANT), RELEASE)
 endif
 
 ifeq ($(KOMODO_VARIANT), BETA)
-LIST = $(shell cat vendor/komodo/komodo.devices | awk '{ print $$1 }')
    ifeq ($(filter $(CURRENT_DEVICE), $(LIST)), $(CURRENT_DEVICE))
       KOMODO_BUILD_TYPE := BETA
       IS_TEST := true
