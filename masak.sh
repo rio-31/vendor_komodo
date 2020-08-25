@@ -341,7 +341,7 @@ if [ "$upload_to_sf" = "test" ]; then
     export KOMODO_VARIANT=BETA
 fi
 
-# GAPPS Variant
+# BUILD Variant
 
 if [ "$gapps" = "gapps" ]; then
     export CURRENT_BUILD_TYPE=gapps
@@ -349,6 +349,10 @@ fi
 
 if [ "$gapps" = "nogapps" ]; then
     export CURRENT_BUILD_TYPE=nogapps
+fi
+
+if [ "$gapps" = "microg" ]; then
+    export CURRENT_BUILD_TYPE=microg
 fi
 
 # CCACHE UMMM!!! Cooks my builds fast
