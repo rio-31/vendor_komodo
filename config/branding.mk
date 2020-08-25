@@ -41,9 +41,9 @@ ifeq ($(KOMODO_VARIANT), BETA)
 endif
 
 # Type of zip
-ifndef
+ifeq ($(CURRENT_BUILD_TYPE), nogapps)
      KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
-ifeq ($(CURRENT_BUILD_TYPE), microg)
+else ifeq ($(CURRENT_BUILD_TYPE), microg)
      KOMODO_BUILD_ZIP_TYPE := MICROG
 else ifeq ($(CURRENT_BUILD_TYPE), gapps)
      KOMODO_BUILD_ZIP_TYPE := GAPPS
@@ -55,7 +55,6 @@ else
     endif
     KOMODO_BUILD_ZIP_TYPE := TOXICOFERA
     CURRENT_BUILD_TYPE := nogapps
-endif
 endif
 
 KOMODO_VERSION := KomodoOS-$(KOMODO_BUILD)-$(KOMODO_PLATFORM_VERSION)-$(KOMODO_BUILD_DATE)-$(KOMODO_BUILD_TYPE)-$(KOMODO_BUILD_ZIP_TYPE)
