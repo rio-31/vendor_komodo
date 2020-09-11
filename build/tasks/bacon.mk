@@ -29,7 +29,6 @@ KOMODO_TARGET_PACKAGE := $(PRODUCT_OUT)/$(KOMODO_VERSION).zip
 .PHONY: komodo
 komodo: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) mv $(INTERNAL_OTA_PACKAGE_TARGET) $(KOMODO_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(KOMODO_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(KOMODO_TARGET_PACKAGE).md5sum
 	$(hide) ./vendor/komodo/tools/generate_json_build_info.sh $(KOMODO_TARGET_PACKAGE)
 	@echo -e ""
 	@echo -e ${CL_RED}"Finish ${cya}Building ${bldcya}Komodo ${txtrst}"${CL_RED}

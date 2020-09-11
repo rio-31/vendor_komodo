@@ -1,6 +1,5 @@
 # Copyright (C) 2012 The CyanogenMod Project
 #           (C) 2017 The LineageOS Project
-#           (C) 2019 The PixelExperience Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -109,7 +108,7 @@ ifeq "$(wildcard $(KERNEL_SRC) )" ""
     ifneq ($(HAS_PREBUILT_KERNEL),)
         $(warning ***************************************************************)
         $(warning * Using prebuilt kernel binary instead of source              *)
-        $(warning * THIS IS DEPRECATED, AND IS NOT ADVISED.                     *)
+        $(warning * THIS IS DEPRECATED, AND WILL BE DISCONTINUED                *)
         $(warning * Please configure your device to download the kernel         *)
         $(warning * source repository to $(KERNEL_SRC))
         $(warning * for more information                                        *)
@@ -164,19 +163,17 @@ KERNEL_MODULE_MOUNTPOINT := vendor
 endif
 MODULES_INTERMEDIATES := $(KERNEL_BUILD_OUT_PREFIX)$(call intermediates-dir-for,PACKAGING,kernel_modules)
 
-PATH_OVERRIDE :=
+
+PATH_OVERRIDE := PATH=$(shell cat $(OUT_DIR)/.path_interposer_origpath):$$PATH
+
 ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
     ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
-        KERNEL_CLANG_VERSION := clang-$(TARGET_KERNEL_CLANG_VERSION)
+        KERNEL_CLANG_VERSION := $(firstword $(shell find $(BUILD_TOP)/prebuilts/clang/host/$(HOST_OS)-x86/ -name AndroidVersion.txt -exec grep -l $(TARGET_KERNEL_CLANG_VERSION) "{}" \; | sed -e 's|/AndroidVersion.txt$$||g;s|^.*/||g'))
     else
         # Use the default version of clang if TARGET_KERNEL_CLANG_VERSION hasn't been set by the device config
         KERNEL_CLANG_VERSION := $(LLVM_PREBUILTS_VERSION)
     endif
     TARGET_KERNEL_CLANG_PATH ?= $(BUILD_TOP)/prebuilts/clang/host/$(HOST_OS)-x86/$(KERNEL_CLANG_VERSION)
-    KBUILD_COMPILER_STRING := $(shell $(TARGET_KERNEL_CLANG_PATH)/bin/clang --version | head -n 1 | \
-	    $(BUILD_TOP)/prebuilts/tools-komodo/$(HOST_OS)-x86/bin/perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')
-    KERNEL_MAKE_FLAGS += KBUILD_COMPILER_STRING="$(KBUILD_COMPILER_STRING)"
-
     ifeq ($(KERNEL_ARCH),arm64)
         KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=aarch64-linux-gnu-
     else ifeq ($(KERNEL_ARCH),arm)
@@ -186,18 +183,7 @@ ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
     endif
     PATH_OVERRIDE += PATH=$(TARGET_KERNEL_CLANG_PATH)/bin:$$PATH LD_LIBRARY_PATH=$(TARGET_KERNEL_CLANG_PATH)/lib64:$$LD_LIBRARY_PATH
     ifeq ($(KERNEL_CC),)
-        KERNEL_CC := CC="$(CCACHE_BIN) clang"
-    endif
-    ifeq ($(TARGET_KERNEL_USE_LLD),true)
-        KERNEL_CC += LD=$(TARGET_KERNEL_CLANG_PATH)/bin/ld.lld
-    endif
-    ifneq ($(TARGET_KERNEL_NO_LLVM_BINUTILS),true)
-        KERNEL_CC += AS=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-as
-        KERNEL_CC += AR=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-ar
-        KERNEL_CC += NM=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-nm
-        KERNEL_CC += OBJCOPY=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-objcopy
-        KERNEL_CC += OBJDUMP=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-objdump
-        KERNEL_CC += STRIP=$(TARGET_KERNEL_CLANG_PATH)/bin/llvm-strip
+        KERNEL_CC := CC="$(CCACHE_BIN) $(TARGET_KERNEL_CLANG_PATH)/bin/clang"
     endif
 endif
 
@@ -207,16 +193,13 @@ endif
 
 PATH_OVERRIDE += PATH=$(KERNEL_TOOLCHAIN_PATH_gcc)/bin:$$PATH
 
-# System tools are no longer allowed on 10+
-PATH_OVERRIDE += $(TOOLS_PATH_OVERRIDE)
-
 KERNEL_ADDITIONAL_CONFIG_OUT := $(KERNEL_OUT)/.additional_config
 
 # Internal implementation of make-kernel-target
 # $(1): output path (The value passed to O=)
 # $(2): target to build (eg. defconfig, modules, dtbo.img)
 define internal-make-kernel-target
-$(PATH_OVERRIDE) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(KERNEL_SRC) O=$(KERNEL_BUILD_OUT_PREFIX)$(1) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(KERNEL_CLANG_TRIPLE) $(KERNEL_CC) $(2)
+$(PATH_OVERRIDE) $(MAKE_PREBUILT) $(KERNEL_MAKE_FLAGS) -C $(KERNEL_SRC) O=$(KERNEL_BUILD_OUT_PREFIX)$(1) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(KERNEL_CLANG_TRIPLE) $(KERNEL_CC) $(2)
 endef
 
 # Make a kernel target
@@ -266,6 +249,7 @@ $(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_CONFIG) $(DEPMOD)
 			echo "Building DTBs"; \
 			$(call make-kernel-target,dtbs); \
 		fi
+	$(hide) mkdir -p $(KERNEL_MODULES_OUT)/lib/modules
 	$(hide) if grep -q '=m' $(KERNEL_CONFIG); then \
 			echo "Building Kernel Modules"; \
 			$(call make-kernel-target,modules) || exit "$$?"; \
@@ -273,7 +257,14 @@ $(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_CONFIG) $(DEPMOD)
 			$(call make-kernel-target,INSTALL_MOD_PATH=$(MODULES_INTERMEDIATES) INSTALL_MOD_STRIP=1 modules_install); \
 			kernel_release=$$(cat $(KERNEL_RELEASE)) \
 			modules=$$(find $(MODULES_INTERMEDIATES)/lib/modules/$$kernel_release -type f -name '*.ko'); \
-			($(call build-image-kernel-modules,$$modules,$(KERNEL_MODULES_OUT),$(KERNEL_MODULE_MOUNTPOINT)/,$(KERNEL_DEPMOD_STAGING_DIR))); \
+			for f in $$modules; do \
+				$(PATH_OVERRIDE) $(KERNEL_TOOLCHAIN_PATH)strip --strip-unneeded $$f; \
+				mv $$f $(KERNEL_MODULES_OUT)/lib/modules; \
+			done; \
+			mkdir -p $(KERNEL_DEPMOD_STAGING_DIR)/lib/modules/0.0/$(KERNEL_MODULE_MOUNTPOINT)/lib/modules && \
+			find $(KERNEL_MODULES_OUT)/lib/modules -name *.ko -exec cp {} $(KERNEL_DEPMOD_STAGING_DIR)/lib/modules/0.0/$(KERNEL_MODULE_MOUNTPOINT)/lib/modules \; && \
+			$(DEPMOD) -b $(KERNEL_DEPMOD_STAGING_DIR) 0.0 && \
+			sed -e 's/\(.*modules.*\):/\/\1:/g' -e 's/ \([^ ]*modules[^ ]*\)/ \/\1/g' $(KERNEL_DEPMOD_STAGING_DIR)/lib/modules/0.0/modules.dep > $(KERNEL_MODULES_OUT)/lib/modules/modules.dep; \
 		fi
 
 .PHONY: kerneltags
