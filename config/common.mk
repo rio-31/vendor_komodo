@@ -143,7 +143,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
 #MicroG
-ifeq ($(USE_MICROG),true)
+ifeq ($(CURRENT_BUILD_TYPE),microg)
 include prebuilts/prebuiltapks/microg.mk
 PRODUCT_PACKAGES += bromite-webview
 endif
