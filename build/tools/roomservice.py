@@ -43,7 +43,7 @@ DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
 custom_local_manifest = ".repo/local_manifests/komodo.xml"
-custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'ten')
+custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', '11')
 custom_dependencies = "komodo.dependencies"
 org_manifest = "komodo-devices"  # leave empty if org is provided in manifest
 org_display = "Komodo-OS-Devices"  # needed for displaying
