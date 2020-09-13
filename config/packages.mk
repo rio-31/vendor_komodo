@@ -24,11 +24,6 @@ PRODUCT_PACKAGES += \
     OmniStyle \
     Longshot \
     NoCutoutOverlay \
-    NexusWallpapersStubPrebuilt2019Static \
-    SafetyHubPrebuilt \
-    SettingsIntelligenceGooglePrebuilt \
-    GooglePermissionControllerOverlay \
-    PixelDocumentsUIGoogleOverlay \
     Recorder \
     RetroMusicPlayer
 
