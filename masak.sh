@@ -330,6 +330,7 @@ fi
 if [ "$re_sync" = "yes" ]; then
     build_message "Sync repo"
     rm -rf external/motorola/faceunlock .repo/local_manifests
+    rm -rf device/xiaomi kernel/xiaomi vendor/xiaomi frameworks/base packagages/apps/Settings
     repo init -u https://github.com/Komodo-OS-Rom/manifest -b $BRANCH_MANIFEST
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
     git clone git@github.com:Komodo-OS-Rom/external_fu.git -b ten external/motorola/faceunlock
