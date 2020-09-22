@@ -335,10 +335,6 @@ if [ "$re_sync" = "yes" ]; then
     git clone git@github.com:Komodo-OS-Rom/external_fu.git -b ten external/motorola/faceunlock
 fi
 
-if [ "$clean_tree" = "yes" ]; then
-    rm -rf .repo/local_manifests
-fi
-
 # Build Variant
 
 if [ "$upload_to_sf" = "release" ]; then
