@@ -44,7 +44,7 @@
 # target_command=bacon
 # jobs=8
 # upload_to_sf=yes
-path_ccache="/$HOME/komodo/.ccache"
+path_ccache="/mnt/komodo/.ccache"
 
 CDIR=$PWD
 OUT="${CDIR}/out/target/product/$device_codename"
