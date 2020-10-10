@@ -2,7 +2,7 @@
 CURRENT_DEVICE=$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)
 
 # Komodo Version
-KOMODO_PLATFORM_VERSION := 2.9
+KOMODO_PLATFORM_VERSION := 2.9.1
 KOMODO_VERSION_NAME := Bali
 
 # Set all versions
